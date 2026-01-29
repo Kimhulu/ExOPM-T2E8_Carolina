@@ -33,6 +33,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   amp = new p5.Amplitude();
+  colorMode(HSB, 360, 100, 100);
 }
 
 function draw() {
@@ -46,29 +47,28 @@ function draw() {
   let centroX = width / 2;
   let centroY = height / 2;
 
+  let maxDist = dist(0, 0, centroX, centroY);
+
   for (let i = 0; i < linhaElls; i++) {
     for (let j = 0; j < height; j += diametro) {
 
       let x = i * diametro;
       let y = j;
 
-      // distância ao centro
       let distCentro = dist(x, y, centroX, centroY);
 
-      // força da pulsação (mais forte no meio)
-      let influencia = map(
-        distCentro,
-        0,
-        dist(0, 0, centroX, centroY),
-        1,
-        0
-      );
+      // influência do som (mais forte no centro)
+      let influencia = map(distCentro, 0, maxDist, 1, 0);
 
       let tamanho = diametro + level * influencia;
 
-      let cor = map(level * influencia, 0, 150, 50, 255);
+      // COR: vermelho no centro → arco-íris nas pontas
+      let hue = map(distCentro, 0, maxDist, 0, 360);
+      let saturation = 90;
+      let brightness = map(influencia, 0, 1, 60, 100);
 
-      fill(cor);
+      fill(hue, saturation, brightness);
+
       ellipse(
         x + random(-1, 1),
         y + random(-1, 1),
@@ -80,13 +80,23 @@ function draw() {
 
   mostrarNomeMusica();
 
-  // Fade in
+  // Fade in do som
   if (fading) {
     fade += 0.02;
     som.setVolume(fade);
     if (fade >= 1) fading = false;
   }
 }
+
+mostrarNomeMusica();
+
+// Fade in
+if (fading) {
+  fade += 0.02;
+  som.setVolume(fade);
+  if (fade >= 1) fading = false;
+}
+
 
 function mostrarNomeMusica() {
   fill(255);
