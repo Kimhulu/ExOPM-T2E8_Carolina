@@ -41,15 +41,15 @@ function draw() {
   linhaElls = width / diametro;
 
   let level = amp.getLevel();
-  level = map(level, 0, 1, 0, 150);
+  level = map(level, 0, 2.5, 0, 150);
 
-  let cor = map(level, 0, 25, 50, 255);
+  let cor = map(level, 0, 20, 50, 255);
 
 
   for (i = 0; i < linhaElls; i++) {
     for (j = 0; j < height; j += diametro) {
       fill(cor)
-      ellipse(0 + i * diametro + random(-1, 5), 0 + j + random(-1, 5), diametro + level, diametro + level)
+      ellipse(0 + i * diametro + random(-1, 2), 0 + j + random(-1, 2), diametro + level, diametro + level)
     }
   }
 }
