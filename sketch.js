@@ -13,11 +13,16 @@ function preload() {
   // brunão.mp3
   // bruninho.mp3
   // golden.mp3
+  // hell.mp3
+  // infinita.mp3
   // mine.mp3
+  // mujeriego.mp3
   // ophelia.mp3
   // sina.mp3
   // sugar.mp3
   // sweaterweather.mp3
+  // takitaki.mp3
+  // vagalumes.mp3
 
   //mudar a musica no final do './playlist/musica'
   som = loadSound('./playlist/bruninho.mp3')
