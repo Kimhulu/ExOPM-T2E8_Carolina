@@ -10,9 +10,10 @@ let amp;
 function preload() {
 
   // MUSICAS 
-  //brunão.mp3
-  //bruninho.mp3
+  // brunão.mp3
+  // bruninho.mp3
   // golden.mp3
+  // mine.mp3
   // ophelia.mp3
   // sina.mp3
   // sugar.mp3
