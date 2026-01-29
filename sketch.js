@@ -9,7 +9,17 @@ let amp;
 
 function preload() {
 
-  som = loadSound('./bruninho.mp3')
+  // MUSICAS 
+  //brunão.mp3
+  //bruninho.mp3
+  // golden.mp3
+  // ophelia.mp3
+  // sina.mp3
+  // sugar.mp3
+  // sweaterweather.mp3
+
+  //mudar a musica no final do './playlist/musica'
+  som = loadSound('./playlist/bruninho.mp3')
 }
 
 
