@@ -11,6 +11,7 @@ let playlist = [
   "moonwalking.mp3",
   "mujeriego.mp3",
   "ophelia.mp3",
+  "rock.mp3",
   "sina.mp3",
   "sugar.mp3",
   "sweaterweather.mp3",
@@ -43,7 +44,7 @@ function draw() {
   linhaElls = width / diametro;
 
   let level = amp.getLevel();
-  level = map(level, 0, 0.3, 0, 150);
+  level = map(level, 0, 0.3, 0, 100); // intensidade da música para brilho
 
   let centroX = width / 2;
   let centroY = height / 2;
@@ -61,23 +62,12 @@ function draw() {
       // influência do som (mais forte no centro)
       let influencia = map(distCentro, 0, maxDist, 1, 0);
 
-      let tamanho = diametro + level * influencia;
+      let tamanho = diametro + level * influencia * 0.5; // leve aumento de tamanho
 
-      // COR: degradê rosa → amarelo usando lerpColor
-      let corCentro = color(330, 90, 100); // rosa
-      let corBorda = color(60, 90, 100);   // amarelo
-      let t = distCentro / maxDist;        // 0 no centro, 1 nas bordas
-      let corFinal = lerpColor(corCentro, corBorda, t);
-
-      // brilho adicional reativo ao som
-      let brilhoExtra = level * 0.3;
-      corFinal = color(
-        hue(corFinal),
-        saturation(corFinal),
-        constrain(brightness(corFinal) + brilhoExtra, 0, 100)
-      );
-
-      fill(corFinal);
+      // COR: cinza base, brilho reage ao som
+      let brightnessBase = map(influencia, 0, 1, 10, 80); // cinza médio
+      let brightnessReactive = constrain(brightnessBase + level * 0.5, 0, 100); // fica mais claro conforme a música
+      fill(0, 0, brightnessReactive); // HSB: 0/0 = cinza
 
       ellipse(
         x + random(-1, 1),
@@ -97,7 +87,6 @@ function draw() {
     if (fade >= 1) fading = false;
   }
 }
-
 function mostrarNomeMusica() {
   fill(255);
   textSize(16);
