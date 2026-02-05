@@ -40,10 +40,12 @@ let playlist = [
   "ophelia.mp3",
   "payphone.mp3",
   "persuasion.mp3",
+  "ponei.mp3",
   "rebel.mp3",
   "rock.mp3",
   "rockn.mp3",
   "satisfaction.mp3",
+  "selenium.mp3",
   "sina.mp3",
   "soda.mp3",
   "starships.mp3",
@@ -153,12 +155,30 @@ function mousePressed() {
 }
 
 function keyPressed() {
+  // Trocar música
   if (keyCode === RIGHT_ARROW || key === 'd' || key === 'D') {
     trocarMusica(1);
   }
 
   if (keyCode === LEFT_ARROW || key === 'a' || key === 'A') {
     trocarMusica(-1);
+  }
+
+  // Controle de volume
+  if (keyCode === UP_ARROW) { // aumentar volume
+    let vol = som.getVolume(); // pega volume atual
+    vol += 0.1;                // aumenta 10%
+    if (vol > 1) vol = 1;      // limite máximo
+    som.setVolume(vol);
+    console.log("Volume:", vol.toFixed(2));
+  }
+
+  if (keyCode === DOWN_ARROW) { // diminuir volume
+    let vol = som.getVolume();
+    vol -= 0.1;                // diminui 10%
+    if (vol < 0) vol = 0;      // limite mínimo
+    som.setVolume(vol);
+    console.log("Volume:", vol.toFixed(2));
   }
 }
 
@@ -172,7 +192,7 @@ function trocarMusica(direcao) {
 
   som = loadSound(`./playlist/${playlist[musicaAtual]}`, () => {
     if (play) {
-      som.loop();
+      som.next();
       som.setVolume(0);
       fade = 0;
       fading = true;
